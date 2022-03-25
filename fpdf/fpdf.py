@@ -3234,7 +3234,8 @@ class FPDF(GraphicsStateMixin):
         if self.page != expected_final_page:
             too = "many" if self.page > expected_final_page else "few"
             error_msg = f"The rendering function passed to FPDF.insert_toc_placeholder triggered too {too} page breaks: "
-            error_msg += f"ToC ended on page {self.page} while it was expected to span exactly {tocp.pages} pages"
+            error_msg += f"ToC ended spanning {self.page - tocp.start_page + 1} pages "
+            error_msg += f"while it was expected to span exactly {tocp.pages} pages"
             raise FPDFException(error_msg)
         self.state = prev_state
 
